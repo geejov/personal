@@ -51,7 +51,9 @@ public class ImageTextViewAdapter extends ArrayAdapter<String> {
 		else if ( label.equals( getContext().getString(R.string.home_call) ) ) {
 			img.setImageResource(R.drawable.call_us);
 		}
-		
+		else if ( label.equals( getContext().getString(R.string.home_find_pharmacy) ) ) {
+			img.setImageResource(R.drawable.pharmacy_icon);
+		}
 		return v;
 		
 	}

@@ -12,7 +12,7 @@
     <string name="home_contact">Contact Us</string>
     <string name="home_about">About Us</string>
     <string name="home_call">Call Us</string>
-    
+    <string name="home_find_pharmacy">Find Pharmacy</string>
     <string name="home_call_number">1-800-9000-1111</string>
-    
+	<string name="find">Find</string>    
 </resources>

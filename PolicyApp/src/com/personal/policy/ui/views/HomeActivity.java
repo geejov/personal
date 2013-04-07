@@ -32,6 +32,7 @@ public class HomeActivity extends Activity {
 		menu_items.add( getString( R.string.home_contact));
 //		menu_items.add( getString( R.string.home_about));
 		menu_items.add( getString( R.string.home_call));
+		menu_items.add( getString( R.string.home_find_pharmacy));
 		
 		ImageTextViewAdapter adapter = new ImageTextViewAdapter(this, R.layout.home_grid_item, menu_items);
 		grid.setAdapter( adapter);
@@ -54,6 +55,10 @@ public class HomeActivity extends Activity {
 		}
 		else if ( getString(R.string.home_find_provider).equals(selection)) {
 			Intent i = new Intent ( this, FindProviderActivity.class);
+			startActivity(i);
+		}
+		else if ( getString(R.string.home_find_pharmacy).equals(selection)) {
+			Intent i = new Intent ( this, FindPharmacyActivity.class);
 			startActivity(i);
 		}
 		else if ( getString(R.string.home_contact).equals(selection)) {
