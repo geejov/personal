@@ -1,8 +1,9 @@
 package com.personal.policy;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Claim {
+public class Claim implements Serializable {
 
 	private String dependantName;
 	private Date claimDate;

@@ -24,6 +24,7 @@
         <activity android:name=".ui.views.MyPolicyActivity" android:label="My Policy"/>
         <activity android:name=".ui.views.MyClaimsActivity" android:label="My Claims"/>
         <activity android:name=".ui.views.FindProviderActivity" android:label="Find Provider"/>
+        <activity android:name=".ui.views.ClaimDetailActivity" android:label="Claims for Dependent"/>
         
     </application>
 </manifest>
