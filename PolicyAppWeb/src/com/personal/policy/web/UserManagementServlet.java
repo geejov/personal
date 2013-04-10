@@ -12,8 +12,8 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gson.Gson;
 import com.personal.policy.ErrorMessage;
 import com.personal.policy.ResponseMessage;
+import com.personal.policy.User;
 import com.personal.policy.dao.UserDAO;
-import com.personal.policy.webobjects.User;
 
 @SuppressWarnings("serial")
 public class UserManagementServlet extends HttpServlet {

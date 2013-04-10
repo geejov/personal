@@ -10,12 +10,16 @@
 		<servlet-class>com.personal.policy.web.WellPointWebServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>AuthServlet</servlet-name>
-		<servlet-class>com.personal.policy.web.AuthServlet</servlet-class>
+		<servlet-name>AuthService</servlet-name>
+		<servlet-class>com.personal.policy.web.services.AuthService</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>UserManagementServlet</servlet-name>
 		<servlet-class>com.personal.policy.web.UserManagementServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>PolicyManagementServlet</servlet-name>
+		<servlet-class>com.personal.policy.web.PolicyManagementServlet</servlet-class>
 	</servlet>
 	
 	<servlet>
@@ -28,13 +32,18 @@
 	</servlet>
 	
 	<servlet-mapping>
+		<servlet-name>PolicyManagementServlet</servlet-name>
+		<url-pattern>/policymanagement</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
 		<servlet-name>UserManagementServlet</servlet-name>
 		<url-pattern>/usermanagement</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
-		<servlet-name>AuthServlet</servlet-name>
-		<url-pattern>/auth</url-pattern>
+		<servlet-name>AuthService</servlet-name>
+		<url-pattern>/services/auth</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

@@ -2,7 +2,23 @@ package com.personal.policy;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.google.appengine.api.datastore.Key;
+
+@Entity
+@Table ( name="Claim")
 public class Claim {
+	
+	@Id
+	@GeneratedValue( strategy=GenerationType.IDENTITY )
+	private Key key;
+	
+	private String policyId;
 
 	private String dependantName;
 	private Date claimDate;
@@ -39,6 +55,22 @@ public class Claim {
 	}
 	public void setClaimStatus(String claimStatus) {
 		this.claimStatus = claimStatus;
+	}
+	
+	public Key getKey() {
+		return key;
+	}
+	
+	public void setKey(Key key) {
+		this.key = key;
+	}
+	
+	public String getPolicyId() {
+		return policyId;
+	}
+	
+	public void setPolicyId(String policyId) {
+		this.policyId = policyId;
 	}
 
 }

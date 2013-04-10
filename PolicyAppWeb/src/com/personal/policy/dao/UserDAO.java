@@ -8,7 +8,7 @@ import javax.persistence.Query;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import com.personal.policy.webobjects.User;
+import com.personal.policy.User;
 
 public class UserDAO extends DAO {
 	

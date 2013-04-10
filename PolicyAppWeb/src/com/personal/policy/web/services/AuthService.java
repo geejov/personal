@@ -1,4 +1,4 @@
-package com.personal.policy.web;
+package com.personal.policy.web.services;
 
 import java.io.IOException;
 
@@ -12,11 +12,11 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gson.Gson;
 import com.personal.policy.ErrorMessage;
 import com.personal.policy.ResponseMessage;
+import com.personal.policy.User;
 import com.personal.policy.dao.UserDAO;
-import com.personal.policy.webobjects.User;
 
 @SuppressWarnings("serial")
-public class AuthServlet extends HttpServlet {
+public class AuthService extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		

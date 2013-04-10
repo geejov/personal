@@ -1,4 +1,4 @@
-package com.personal.policy.webobjects;
+package com.personal.policy;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,5 +1,5 @@
 <%@page import="com.google.appengine.api.datastore.KeyFactory"%>
-<%@page import="com.personal.policy.webobjects.User"%>
+<%@page import="com.personal.policy.User"%>
 <%@page import="java.util.List"%>
 <%@page import="com.personal.policy.dao.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
