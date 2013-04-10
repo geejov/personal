@@ -66,6 +66,7 @@ public class PolicyManagementServlet extends HttpServlet {
 			String claim_amount= req.getParameter("claim_amount");
 			String claim_status = req.getParameter("claim_status");
 			String approved_amount = req.getParameter("approved_amount");
+			String policyid = req.getParameter("policyid");
 			
 			Claim c = new Claim();
 			c.setDependantName(dependent);
@@ -73,6 +74,7 @@ public class PolicyManagementServlet extends HttpServlet {
 			c.setClaimStatus(claim_status);
 			c.setApprovedAmount(Double.parseDouble(approved_amount));
 			c.setClaimDate( new Date());
+			c.setPolicyId(policyid);
 			
 			PolicyDAO.createClaim(c);
 			resp.sendRedirect("/users.jsp");

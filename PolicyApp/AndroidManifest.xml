@@ -15,11 +15,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".ui.views.BoughtDetailsActivity" android:label="Stock Bought"/>
-        <activity android:name=".ui.StocksTransactionsActivity" android:label="Trade History"/>
-        <activity android:name=".ui.StocksSummaryActivity" android:label="Stock Summary"/>
-        <activity android:name=".ui.views.SoldDetailsActivitytivity" android:label="Stock Sold"/>
-        <activity android:name=".ui.views.EditTransactionActivity" android:label="Update Transaction"/>
+        <activity android:name=".ui.views.RegistrationActivity" android:label="Sign Up"/>
         <activity android:name=".ui.views.HomeActivity" android:label="Home"/>
         <activity android:name=".ui.views.MyPolicyActivity" android:label="My Policy"/>
         <activity android:name=".ui.views.MyClaimsActivity" android:label="My Claims"/>

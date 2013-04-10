@@ -1,5 +1,8 @@
 package com.personal.policy.ui.views;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -10,8 +13,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.personal.policy.ErrorMessage;
 import com.personal.policy.R;
+import com.personal.policy.ResponseMessage;
+import com.personal.policy.db.DataStore;
+import com.personal.policy.net.NetUtils;
+import com.personal.policy.net.PolicyJSONUtils;
 
 public class LoginActivity extends Activity {
 	
@@ -35,7 +44,10 @@ public class LoginActivity extends Activity {
 					@Override
 					public void run() {
 						try {
-							authenticate(username, password);
+							String userId = authenticate(username, password);
+							DataStore d = new DataStore(LoginActivity.this);
+							d.saveUserId(userId);
+							
 							dialog.dismiss();
 
 							Intent i = new Intent ( LoginActivity.this, HomeActivity.class);
@@ -58,17 +70,38 @@ public class LoginActivity extends Activity {
 				t.start();
 			}
 		});
+		
+		TextView txtRegister = (TextView) findViewById(R.id.txtRegister);
+		txtRegister.setOnClickListener( new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Intent i = new Intent(LoginActivity.this,RegistrationActivity.class);
+				startActivity(i);
+				
+			}
+		});
 	}
 	
-	private boolean authenticate ( String username, String password ) throws Exception {
+	private String authenticate ( String email, String password ) throws Exception {
 		
-		Thread.sleep(1000);
-		return true;
-//		if ( "admin".equalsIgnoreCase(username) && "pwd".equalsIgnoreCase(password)) {
-//			return true;
-//		}
-//		else
-//			throw new Exception ( "Login failed");
+		NetUtils utils = new NetUtils();
+		
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("action", "signin");
+		parameters.put("email", email);
+		parameters.put("password", password);
+		
+		String response = utils.postAuthRequest(parameters);
+		
+		if ( PolicyJSONUtils.isJSONError(response) ) {
+			ErrorMessage e = PolicyJSONUtils.parseError(response);
+			throw new Exception (e.getError());
+		} else {
+			ResponseMessage m = PolicyJSONUtils.parseResponse(response);
+			return m.getResponse();
+		}
 	}
 	
 	private void showAlert ( String text ) {

@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import com.personal.policy.Claim;
 import com.personal.policy.R;
+import com.personal.policy.db.DataStore;
 import com.personal.policy.net.NetUtils;
 import com.personal.policy.ui.ClaimDetailListAdapter;
 
@@ -20,13 +21,19 @@ public class ClaimDetailActivity extends Activity {
 		setContentView(R.layout.claim_details);
 		
 		NetUtils net = new NetUtils();
-		List<Claim> claims = net.getClaims("dummy", "dummy");
 		
-		ClaimDetailListAdapter adapter = new ClaimDetailListAdapter(this, R.layout.claim_detail_list_item, claims);
-		
-		ListView list = (ListView) findViewById(R.id.claim_list);
-		list.setAdapter(adapter);
-		
+		String dependent = getIntent().getStringExtra("dependent");
+		try {
+			List<Claim> claims = net.getClaims( new DataStore(this).getUserId(), dependent);
+			ClaimDetailListAdapter adapter = new ClaimDetailListAdapter(this, R.layout.claim_detail_list_item, claims);
+			
+			ListView list = (ListView) findViewById(R.id.claim_list);
+			list.setAdapter(adapter);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return;
+		}
 		
 	}
 

@@ -45,6 +45,26 @@ public class PolicyDAO extends DAO {
 		return policies;
 	}
 	
+	public static List<Claim> getClaimsForDependant( String policyid, String dependent) {
+		List<Claim> claims = new ArrayList<Claim>();
+		EntityManager em = EMF.get().createEntityManager();
+		try {
+			Query q = em.createQuery("select c from Claim c where c.policyId ='"+policyid+"' and c.dependantName='"+dependent+"'");
+
+			try {
+				for ( Object o : q.getResultList()) {
+					claims.add( (Claim) o);
+					em.detach(o);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} finally {
+			em.close();
+		}
+		return claims;
+	}
+	
 	public static Policy getPolicy ( String userKey ) {
 		
 		Policy p = null ; 

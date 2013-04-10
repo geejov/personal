@@ -27,19 +27,19 @@ public final class R {
         public static final int btnLogin=0x7f060014;
         public static final int btnSave=0x7f060018;
         public static final int btnSearch=0x7f06000c;
+        public static final int btnSignUp=0x7f060022;
         public static final int btnUpdate=0x7f060009;
         public static final int claim_detail_layout=0x7f060004;
         public static final int claim_list=0x7f060005;
         public static final int dependent_list=0x7f060015;
         public static final int homeGrid=0x7f06000e;
-        public static final int imageView1=0x7f060011;
         public static final int imgBtn=0x7f06000f;
-        public static final int mnuBuy=0x7f06001c;
-        public static final int mnuDeleteTrans=0x7f06001f;
-        public static final int mnuEditTrans=0x7f06001e;
-        public static final int mnuNewBuy=0x7f060020;
-        public static final int mnuSell=0x7f06001d;
-        public static final int mnuTransactions=0x7f060021;
+        public static final int mnuBuy=0x7f060023;
+        public static final int mnuDeleteTrans=0x7f060026;
+        public static final int mnuEditTrans=0x7f060025;
+        public static final int mnuNewBuy=0x7f060027;
+        public static final int mnuSell=0x7f060024;
+        public static final int mnuTransactions=0x7f060028;
         public static final int mypolicylist=0x7f060016;
         public static final int provider_list=0x7f06000d;
         public static final int provider_location=0x7f06000b;
@@ -48,6 +48,13 @@ public final class R {
         public static final int txtPassword=0x7f060013;
         public static final int txtPrice=0x7f060007;
         public static final int txtQuantity=0x7f060008;
+        public static final int txtRegister=0x7f060011;
+        public static final int txtRegisterCPassword=0x7f06001f;
+        public static final int txtRegisterEmail=0x7f06001d;
+        public static final int txtRegisterName=0x7f06001c;
+        public static final int txtRegisterPassword=0x7f06001e;
+        public static final int txtRegisterSSN=0x7f060021;
+        public static final int txtRegisterSubsID=0x7f060020;
         public static final int txtStock=0x7f060006;
         public static final int txtUser=0x7f060012;
         public static final int txtValue=0x7f060017;
@@ -74,6 +81,7 @@ public final class R {
         public static final int mypolicy_list_item=0x7f03000b;
         public static final int new_buy=0x7f03000c;
         public static final int provider_list_item=0x7f03000d;
+        public static final int register=0x7f03000e;
     }
     public static final class menu {
         public static final int context_menu=0x7f050000;
@@ -82,23 +90,32 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040001;
-        public static final int claim_detail_amount=0x7f04000d;
-        public static final int claim_detail_approved_amount=0x7f04000f;
-        public static final int claim_detail_date=0x7f04000c;
-        public static final int claim_detail_status=0x7f04000e;
+        public static final int claim_detail_amount=0x7f040016;
+        public static final int claim_detail_approved_amount=0x7f040018;
+        public static final int claim_detail_date=0x7f040015;
+        public static final int claim_detail_status=0x7f040017;
+        public static final int forgot_pwd=0x7f040006;
         public static final int hello=0x7f040000;
-        public static final int home_about=0x7f040009;
-        public static final int home_call=0x7f04000a;
-        public static final int home_call_number=0x7f04000b;
-        public static final int home_contact=0x7f040008;
-        public static final int home_find_provider=0x7f040007;
-        public static final int home_my_claims=0x7f040006;
-        public static final int home_my_policy=0x7f040005;
+        public static final int home_about=0x7f040012;
+        public static final int home_call=0x7f040013;
+        public static final int home_call_number=0x7f040014;
+        public static final int home_contact=0x7f040011;
+        public static final int home_find_provider=0x7f040010;
+        public static final int home_my_claims=0x7f04000f;
+        public static final int home_my_policy=0x7f04000e;
         public static final int password=0x7f040003;
-        public static final int provider_location=0x7f040011;
-        public static final int provider_name=0x7f040010;
-        public static final int provider_search_btn=0x7f040012;
-        public static final int provider_search_results=0x7f040013;
+        public static final int provider_location=0x7f04001a;
+        public static final int provider_name=0x7f040019;
+        public static final int provider_search_btn=0x7f04001b;
+        public static final int provider_search_results=0x7f04001c;
+        public static final int register=0x7f040005;
+        public static final int register_btn_signup=0x7f04000d;
+        public static final int register_c_password=0x7f04000a;
+        public static final int register_email=0x7f040008;
+        public static final int register_fullname=0x7f040007;
+        public static final int register_password=0x7f040009;
+        public static final int register_ssn=0x7f04000b;
+        public static final int register_subscriber_id=0x7f04000c;
         public static final int signin=0x7f040004;
         public static final int username=0x7f040002;
     }

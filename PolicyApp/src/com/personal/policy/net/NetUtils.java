@@ -1,117 +1,128 @@
 package com.personal.policy.net;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.personal.policy.Claim;
 import com.personal.policy.Policy;
 import com.personal.policy.Provider;
 
 public class NetUtils {
 	
-	public Policy getPolicy( String userid ) {
+	public List<Policy> getPolicies( String userId ) throws Exception {
 		
-		Policy p = new Policy();
+		Map<String,String> parameters = new HashMap<String, String>();
 		
-		p.setHolderName("Geejov S A");
-		p.setPolicyNumber("1234567890");
-		p.setPremium(1563);
-		p.setValidityStart( new Date());
-		p.setValidityEnd( new Date());
-		p.setSumInsured( 300000 );
+		parameters.put("userid", userId);
+		parameters.put("action", "getpolicies");
+		String json = postPolicyRequest(parameters);
 		
-		p.getDependents().add("Saneesh Joseph");
-		p.getDependents().add("Pramod Mohan");
-		p.getDependents().add("Jinny Cherian");
+		Gson gson = new Gson();
+		List<Policy> policies = gson.fromJson(json, new TypeToken<List<Policy>>(){}.getType());
 		
+		return policies;
+	}
+
+	public List<Claim> getClaims( String userid , String dependent ) throws Exception {
+		
+		Map<String,String> parameters = new HashMap<String, String>();
+		
+		parameters.put("userid", userid);
+		parameters.put("dependent", dependent);
+		parameters.put("action", "getclaims");
+		String json = postPolicyRequest(parameters);
+		
+		Gson gson = new Gson();
+		List<Claim> claims = gson.fromJson(json, new TypeToken<List<Claim>>(){}.getType());
+		
+		return claims;
+		
+	}
+	
+	public List<Provider> getProviders( String name, String location ) throws Exception {
+		
+		Map<String,String> parameters = new HashMap<String, String>();
+		
+		parameters.put("provider_location", location);
+		parameters.put("provider_name", name);
+		parameters.put("action", "findprovider");
+		String json = postProviderRequest(parameters);
+		
+		Gson gson = new Gson();
+		List<Provider> providers = gson.fromJson(json, new TypeToken<List<Provider>>(){}.getType());
+		
+		return providers;
+	}
+	
+	public String postRequest( String endpoint,  Map<String, String> parameters ) throws Exception{
+		
+		HttpClient client = new DefaultHttpClient();
+		HttpPost post = new HttpPost( endpoint );
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		
+		for ( String p : parameters.keySet() ) {
+			params.add( new BasicNameValuePair(p, parameters.get(p)));
+		}
+		post.setEntity(new UrlEncodedFormEntity(params));
+		
+		HttpResponse res = client.execute(post);
+		
+		BufferedReader reader = new BufferedReader( new InputStreamReader(res.getEntity().getContent()));
+		String line = null;
+		String response="";
+		
+		while ( (line = reader.readLine())!=null) {
+			response+=line;
+		}
+		
+		reader.close();
+		
+		client.getConnectionManager().shutdown();
+		
+		return response;
+	}
+	
+	public String postAuthRequest( Map<String, String> parameters ) throws Exception {
+		return postRequest(getServerUrl()+"/services/auth", parameters);
+	}
+	
+	public String postPolicyRequest( Map<String, String> parameters ) throws Exception {
+		return postRequest(getServerUrl()+"/services/policy", parameters);
+	}
+	
+	public String postProviderRequest( Map<String, String> parameters ) throws Exception {
+		return postRequest(getServerUrl()+"/services/provider", parameters);
+	}
+	
+	public Object getJSONObject( String json ) {
+		
+		System.out.println(json);
+		Gson gson = new Gson();
+		Provider p = gson.fromJson(json, Provider.class);
+		System.out.println(p.getName());
+		System.out.println(p.getAddress());
+		System.out.println(p.getPhone());
 		
 		return p;
 	}
-
-	public List<Claim> getClaims( String userid ) {
-		
-		List<Claim> claims = new ArrayList<Claim>();
-		
-		Claim claim = new Claim();
-		claim.setDependantName("Saneesh Joseph");
-		claim.setAmount(12000);
-		claim.setApprovedAmount(8900);
-		claim.setClaimDate( new Date());
-		claim.setClaimStatus("Approved");
-		claims.add(claim);
-		
-		claim = new Claim();
-		claim.setDependantName("Rajeev SA");
-		claim.setAmount(12000);
-		claim.setApprovedAmount(8900);
-		claim.setClaimDate( new Date());
-		claim.setClaimStatus("Approved");
-		claims.add(claim);
-		
-		claim = new Claim();
-		claim.setDependantName("Sajeev S A");
-		claim.setAmount(12000);
-		claim.setApprovedAmount(8900);
-		claim.setClaimDate( new Date());
-		claim.setClaimStatus("Approved");
-		
-		claims.add(claim);
-		
-		return claims;
-		
-	}
 	
-	public List<Claim> getClaims( String userid , String dependent ) {
-		
-		List<Claim> claims = new ArrayList<Claim>();
-		
-		Claim claim = new Claim();
-		claim.setDependantName("Rajeev SA");
-		claim.setAmount(12000);
-		claim.setApprovedAmount(8900);
-		claim.setClaimDate( new Date());
-		claim.setClaimStatus("Approved");
-		claims.add(claim);
-		
-		claim = new Claim();
-		claim.setDependantName("Rajeev SA");
-		claim.setAmount(13000);
-		claim.setApprovedAmount(9000);
-		claim.setClaimDate( new Date());
-		claim.setClaimStatus("Pending");
-		
-		claims.add(claim);
-		claims.add(claim);
-		claims.add(claim);
-		claims.add(claim);
-		claims.add(claim);
-		
-		return claims;
-		
-	}
-	
-	public List<Provider> getProviders( String name, String location ) {
-		
-		List<Provider> providers = new ArrayList<Provider>();
-		
-		Provider p = new Provider();
-		p.setName("Dr. Saneesh Joseph");
-		p.setAddress("#113, Trinity Meadows, Sarjapur Road");
-		p.setPhone("+919972183811");
-		
-		providers.add(p);
-		providers.add(p);
-		providers.add(p);
-		providers.add(p);
-		providers.add(p);
-		providers.add(p);
-		providers.add(p);
-		providers.add(p);
-		providers.add(p);
-		providers.add(p);
-		
-		return providers;
-		
+	private String getServerUrl() {
+		return "http://10.0.2.2:8888";
 	}
 }

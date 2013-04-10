@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.personal.policy.Policy;
 import com.personal.policy.R;
+import com.personal.policy.db.DataStore;
 import com.personal.policy.net.NetUtils;
 import com.personal.policy.ui.KeyValueListAdapter;
 import com.personal.policy.ui.KeyValueListItem;
@@ -16,7 +17,7 @@ import com.personal.policy.ui.KeyValueListItem;
 public class MyPolicyActivity extends Activity {
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)  {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.mypolicy);
@@ -24,9 +25,25 @@ public class MyPolicyActivity extends Activity {
 		List<KeyValueListItem> items = new  ArrayList<KeyValueListItem>();
 		
 		NetUtils net = new NetUtils();
-		Policy p = net.getPolicy("dummy");
 		
-		items.add( new KeyValueListItem("Name",p.getHolderName()));
+		DataStore d = new DataStore(this);
+		String userId = d.getUserId();
+		
+		Policy p=null;
+		
+		try {
+			List<Policy> policies = net.getPolicies(userId);
+		
+			if ( policies.size() == 0 ) return;
+			
+			 p = policies.get(0);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		
+//		items.add( new KeyValueListItem("Name",p.getHolderName()));
 		items.add( new KeyValueListItem("Policy Number",p.getPolicyNumber()));
 		items.add( new KeyValueListItem("Premium", p.getPremium()+""));
 		items.add( new KeyValueListItem("Validity From",(p.getValidityStart().getMonth()+1)+"/"
